@@ -13,8 +13,8 @@
   <style>
     body {
       background-color: #e5f5e9;
-      color: #333; 
-      transition: background-color 0.3s, color 0.3s; 
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     .container {
@@ -28,23 +28,23 @@
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, box-shadow 0.3s; 
-    
+      transition: background-color 0.3s, box-shadow 0.3s;
+
     }
 
     .bg-body-tertiary {
       background-color: #96c5a8 !important;
       border-bottom: 1px solid #c0eac7;
       box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-      transition: background-color 0.3s, border-bottom 0.3s, box-shadow 0.3s; 
-    
+      transition: background-color 0.3s, border-bottom 0.3s, box-shadow 0.3s;
+
     }
 
     .home-container .content h3,
     .home-container .content p {
       color: #333;
-      transition: color 0.3s; 
-    
+      transition: color 0.3s;
+
     }
 
     .container.mt-4 {
@@ -52,47 +52,47 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.07);
       padding: 30px;
-      transition: background 0.3s, box-shadow 0.3s; 
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .container.mt-4 h1,
     .container.mt-4 h2 {
-      color: #333; 
-      transition: color 0.3s; 
+      color: #333;
+      transition: color 0.3s;
     }
 
     .p-3.mb-4.rounded {
       background-color: #96c5a8;
       border: 3px solid black;
-      transition: background-color 0.3s, border 0.3s; 
+      transition: background-color 0.3s, border 0.3s;
     }
-    
+
     .p-3.mb-4.rounded h2,
     .p-3.mb-4.rounded p {
-      color: #333; 
-      transition: color 0.3s; 
+      color: #333;
+      transition: color 0.3s;
     }
 
     footer {
       background-color: #96c5a8;
       color: white;
-      transition: background-color 0.3s, color 0.3s; 
+      transition: background-color 0.3s, color 0.3s;
     }
 
-  
+
     body.dark-mode {
-      background-color: #1a1a1a; 
-      color: #f5f5f5; 
+      background-color: #1a1a1a;
+      color: #f5f5f5;
     }
 
     body.dark-mode .bg-body-tertiary {
-      background-color: #2c2c2c !important; 
+      background-color: #2c2c2c !important;
       border-bottom-color: #444;
       box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.1);
     }
 
     body.dark-mode form {
-      background-color: #333; 
+      background-color: #333;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
 
@@ -106,21 +106,21 @@
     }
 
     body.dark-mode .container.mt-4 {
-      background: #2c2c2c; 
+      background: #2c2c2c;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.07);
     }
 
     body.dark-mode .p-3.mb-4.rounded {
-      background-color: #444; 
+      background-color: #444;
       border-color: #666;
     }
 
     body.dark-mode footer {
-      background-color: #2c2c2c; 
+      background-color: #2c2c2c;
       color: #f5f5f5;
     }
 
-   
+
     .dark-mode-toggle {
       background: none;
       border: none;
@@ -175,10 +175,31 @@
           <li class="nav-item">
             <a class="nav-link" href="Subpaginas/carrinho.html">Carrinho</a>
           </li>
+          <li class="nav-item position-relative">
+            <a class="nav-link" href="#" id="cartDropdownToggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
+            <i class="bi bi-cart-fill"></i>
+            <span id="cart-count"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="display: none;">
+              0
+            </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdownToggle"
+              style="min-width: 300px;" id="cartDropdownMenu">
+              <li id="cart-items-list">Seu carrinho está vazio.</li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item text-center" href="carrinho.html">Ver Carrinho</a></li>
+            </ul>
+          </li>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         </ul>
-        <button id="darkModeToggle" class="dark-mode-toggle">
-          <i class="bi bi-moon-fill" id="darkModeIcon"></i> </button>
       </div>
+
+      <button id="darkModeToggle" class="dark-mode-toggle">
+        <i class="bi bi-moon-fill" id="darkModeIcon"></i> </button>
+    </div>
     </div>
   </nav>
 
@@ -196,27 +217,36 @@
         </div>
       </section>
       <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators" style="max-width: 800px; width: 100%; border-radius: 10px; margin-left: -70px;">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <div class="carousel-indicators"
+          style="max-width: 800px; width: 100%; border-radius: 10px; margin-left: -70px;">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="img/banner.png" class="d-block w-100" alt="..." style="max-width: 805px; width: 100%; border-radius: 10px; margin-left: -70px;">
+            <img src="img/banner.png" class="d-block w-100" alt="..."
+              style="max-width: 850px; width: 100%; border-radius: 10px; margin-left: -70px;">
           </div>
           <div class="carousel-item">
-            <img src="img/band.jpg" class="d-block w-100" alt="..." style="max-width: 850px; width: 100%; border-radius: 10px; margin-left: -70px;">
+            <img src="img/band.jpg" class="d-block w-100" alt="..."
+              style="max-width: 850px; width: 100%; border-radius: 10px; margin-left: -70px;">
           </div>
           <div class="carousel-item">
-            <img src="img/estadio2.jpg" class="d-block w-100" alt="..." style="max-width: 850px; width: 100%; border-radius: 10px; margin-left: -70px;">
+            <img src="img/estadio2.jpg" class="d-block w-100" alt="..."
+              style="max-width: 850px; width: 100%; border-radius: 10px; margin-left: -70px;">
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -248,7 +278,7 @@
           </div>
         </div>
       </div>
-      
+
       <section class="mb-4">
         <h2 class="text-center mb-4">Ouça nossa música tema!</h2>
         <div class="text-center">
@@ -258,7 +288,7 @@
           </audio>
         </div>
       </section>
-      
+
       <section class="review" id="review">
         <h2 class="title" style="text-align: center;"><strong>NOSSOS <span>CLIENTES</span></strong></h2>
         <div class="box-container">
@@ -311,34 +341,75 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    function renderCartDropdown() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItemsList = document.getElementById('cart-items-list');
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = 'Seu carrinho está vazio.';
+            } else {
+                cartItemsList.innerHTML = cart.map(item => `
+      <div class="mb-2">
+      <strong>${item.nome || item.name || 'Produto'}</strong><br>
+      <small>Qtd: ${item.quantidade || item.qtd || 1}</small>
+      </div>
+      `).join('');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            renderCartDropdown();
+            document.getElementById('cartDropdownToggle').addEventListener('click', renderCartDropdown);
+        });
+        window.addEventListener('storage', renderCartDropdown);
+        setInterval(renderCartDropdown, 500);
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let count = Array.isArray(cart) ? cart.length : 0;
+            const cartCount = document.getElementById('cart-count');
+            if (count > 0) {
+                cartCount.textContent = count;
+                cartCount.style.display = 'inline-block';
+            } else {
+                cartCount.style.display = 'none';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+
+
+        window.addEventListener('storage', updateCartCount);
+
+
+        setInterval(updateCartCount, 500);
+
+    document.addEventListener('DOMContentLoaded', function () {
       const darkModeToggle = document.getElementById('darkModeToggle');
       const darkModeIcon = document.getElementById('darkModeIcon');
       const body = document.body;
 
-      
+
       const savedMode = localStorage.getItem('darkMode');
       if (savedMode === 'enabled') {
         body.classList.add('dark-mode');
         darkModeIcon.classList.remove('bi-moon-fill');
-        darkModeIcon.classList.add('bi-sun-fill'); 
+        darkModeIcon.classList.add('bi-sun-fill');
       }
 
-      darkModeToggle.addEventListener('click', function() {
+      darkModeToggle.addEventListener('click', function () {
         body.classList.toggle('dark-mode');
 
-        
+
         if (body.classList.contains('dark-mode')) {
           darkModeIcon.classList.remove('bi-moon-fill');
           darkModeIcon.classList.add('bi-sun-fill');
-          localStorage.setItem('darkMode', 'enabled'); 
+          localStorage.setItem('darkMode', 'enabled');
         } else {
           darkModeIcon.classList.remove('bi-sun-fill');
           darkModeIcon.classList.add('bi-moon-fill');
-          localStorage.setItem('darkMode', 'disabled'); 
+          localStorage.setItem('darkMode', 'disabled');
         }
       });
     });
   </script>
 </body>
+
 </html>

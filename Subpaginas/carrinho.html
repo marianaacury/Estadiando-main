@@ -12,7 +12,6 @@
   <style>
     body {
       background-color: #e5f5e9;
-
     }
 
     .container {
@@ -34,19 +33,19 @@
       box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     }
 
-     body.dark-mode {
-      background-color: #1a1a1a; 
-      color: #f5f5f5; 
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #f5f5f5;
     }
 
     body.dark-mode .bg-body-tertiary {
-      background-color: #2c2c2c !important; 
+      background-color: #2c2c2c !important;
       border-bottom-color: #444;
       box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.1);
     }
 
     body.dark-mode form {
-      background-color: #333; 
+      background-color: #333;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
 
@@ -56,11 +55,11 @@
     body.dark-mode .container.mt-4 h2,
     body.dark-mode .p-3.mb-4.rounded h2,
     body.dark-mode .p-3.mb-4.rounded p {
-      color: #f5f5f5; 
+      color: #f5f5f5;
     }
 
     body.dark-mode .container.mt-4 {
-      background: #2c2c2c; 
+      background: #2c2c2c;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.07);
     }
 
@@ -70,11 +69,10 @@
     }
 
     body.dark-mode footer {
-      background-color: #2c2c2c; 
+      background-color: #2c2c2c;
       color: #f5f5f5;
     }
 
-   
     .dark-mode-toggle {
       background: none;
       border: none;
@@ -128,6 +126,26 @@
           <li class="nav-item">
             <a class="nav-link" href="carrinho.html">Carrinho</a>
           </li>
+          <li class="nav-item position-relative">
+            <a class="nav-link" href="#" id="cartDropdownToggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
+            <i class="bi bi-cart-fill"></i>
+            <span id="cart-count"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="display: none;">
+              0
+            </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdownToggle"
+              style="min-width: 300px;" id="cartDropdownMenu">
+              <li id="cart-items-list">Seu carrinho está vazio.</li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item text-center" href="carrinho.html">Ver Carrinho</a></li>
+            </ul>
+          </li>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
         </ul>
         <button id="darkModeToggle" class="dark-mode-toggle">
           <i class="bi bi-moon-fill" id="darkModeIcon"></i> </button>
@@ -135,8 +153,8 @@
     </div>
   </nav>
 
-<div class="container">
-    <h2 class="mb-4 text-center">Carrinho de Compras</h2>
+  <div class="container">
+    <h2 class="mb-4 text-center">CARRINHO DE COMPRAS</h2>
 
     <div id="empty-box" class="empty d-none">
       Seu carrinho está vazio. <a href="loja.html" class="link-success fw-semibold">Voltar para a loja</a>.
@@ -160,6 +178,38 @@
             <th>R$ <span id="cart-total">0,00</span></th>
             <th></th>
           </tr>
+          <tr id="discount-row" style="display:none;">
+            <th colspan="3" class="text-end text-success">Desconto aplicado:</th>
+            <th class="text-success">- R$ <span id="cart-discount">0,00</span></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="3" class="text-end">Total com desconto:</th>
+            <th>R$ <span id="cart-final-total">0,00</span></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th colspan="5" class="text-center" style="background-color: #daefdd;">
+              <p style="background-color: #69967a; color: #fff;">ESCOLHA SEU MÉTODO DE PAGAMENTO</p>
+              <div class="d-flex justify-content-center gap-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="pagamento" id="pagamentoPix" value="pix" checked>
+                  <label class="form-check-label" for="pagamentoPix">Pix</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="pagamento" id="pagamentoCartao" value="cartao">
+                  <label class="form-check-label" for="pagamentoCartao">Cartão</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="pagamento" id="pagamentoBoleto" value="boleto">
+                  <label class="form-check-label" for="pagamentoBoleto">Boleto</label>
+                </div>
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <td colspan="5" id="parcelamento-info" class="text-center"></td>
+          </tr>
         </tfoot>
       </table>
     </div>
@@ -170,41 +220,74 @@
     </div>
   </div>
   <footer class="text-center mt-4">
-            <p>&copy; 2025 Estadiando. Todos os direitos reservados.</p>
-        </footer>
+    <p>&copy; 2025 Estadiando. Todos os direitos reservados.</p>
+  </footer>
 
-  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+     function renderCartDropdown() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsList = document.getElementById('cart-items-list');
+    if (cart.length === 0) {
+      cartItemsList.innerHTML = 'Seu carrinho está vazio.';
+    } else {
+      cartItemsList.innerHTML = cart.map(item => `
+      <div class="mb-2">
+      <strong>${item.nome || item.name || 'Produto'}</strong><br>
+      <small>Qtd: ${item.quantidade || item.qtd || 1}</small>
+      </div>
+      `).join('');
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    renderCartDropdown();
+    document.getElementById('cartDropdownToggle').addEventListener('click', renderCartDropdown);
+  });
+  window.addEventListener('storage', renderCartDropdown);
+  setInterval(renderCartDropdown, 500);
+
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let count = Array.isArray(cart) ? cart.length : 0;
+    const cartCount = document.getElementById('cart-count');
+    if (count > 0) {
+      cartCount.textContent = count;
+      cartCount.style.display = 'inline-block';
+    } else {
+      cartCount.style.display = 'none';
+    }
+  }
+  document.addEventListener('DOMContentLoaded', updateCartCount);
+
+
+  window.addEventListener('storage', updateCartCount);
+
+
+  setInterval(updateCartCount, 500);
 
     const catalogo = {
-      caneta:   { nome: "Caneta",   preco: 15.00 },
+      caneta: { nome: "Caneta", preco: 15.00 },
       cachecol: { nome: "Cachecol", preco: 40.00 },
-      caderno:  { nome: "Caderno",  preco: 25.00 },
+      caderno: { nome: "Caderno", preco: 25.00 },
       camiseta: { nome: "Camiseta", preco: 30.00 },
-      bloco:    { nome: "Bloco",    preco: 20.00 },
-      caneca:   { nome: "Caneca",   preco: 30.00 },
+      bloco: { nome: "Bloco", preco: 20.00 },
+      caneca: { nome: "Caneca", preco: 30.00 },
     };
 
- 
     const money = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     const qs = (sel) => document.querySelector(sel);
 
- 
     let cart = [];
 
-   
     function loadCart() {
       try { cart = JSON.parse(localStorage.getItem('cart')) || []; }
-      catch(e){ cart = []; }
+      catch (e) { cart = []; }
     }
 
- 
     function saveCart() {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    
     function addFromQuery() {
       const params = new URLSearchParams(window.location.search);
       const pid = (params.get('produto') || '').toLowerCase().trim();
@@ -218,14 +301,55 @@
         cart.push({ id: pid, nome: p.nome, quantidade: 1, preco: p.preco });
       }
       saveCart();
-   
+
       history.replaceState({}, document.title, window.location.pathname);
+    }
+
+
+    function calcularDesconto(total) {
+      if (total >= 200) return 0.10;
+      if (total >= 100) return 0.05;
+      return 0;
+    }
+
+
+    function gerarParcelas(valor) {
+      let maxParcelas = Math.min(3, Math.floor(valor / 30));
+      if (maxParcelas < 1) maxParcelas = 1;
+      let opcoes = [];
+      for (let i = 1; i <= maxParcelas; i++) {
+        opcoes.push({
+          qtd: i,
+          valor: valor / i
+        });
+      }
+      return opcoes;
+    }
+
+    function renderParcelamento(valor) {
+      const info = qs('#parcelamento-info');
+      if (!info) return;
+      if (valor < 30) {
+        info.innerHTML = '<span class="text-muted">Parcelamento disponível para compras acima de R$ 30,00.</span>';
+        return;
+      }
+      const parcelas = gerarParcelas(valor);
+      let select = `<label for="parcelas-select" class="me-2"><strong>Parcelamento:</strong></label>
+        <select id="parcelas-select" class="form-select d-inline-block w-auto form-select-sm">`;
+      parcelas.forEach(p => {
+        select += `<option value="${p.qtd}">${p.qtd}x de ${money(p.valor)}</option>`;
+      });
+      select += '</select>';
+      info.innerHTML = select;
     }
 
     function renderCart() {
       const tbody = qs('#cart-items');
       const table = qs('#cart-table');
       const empty = qs('#empty-box');
+      const discountRow = qs('#discount-row');
+      const discountSpan = qs('#cart-discount');
+      const finalTotalSpan = qs('#cart-final-total');
 
       tbody.innerHTML = '';
 
@@ -233,6 +357,9 @@
         table.classList.add('d-none');
         empty.classList.remove('d-none');
         qs('#cart-total').textContent = '0,00';
+        discountRow.style.display = 'none';
+        finalTotalSpan.textContent = '0,00';
+        renderParcelamento(0);
         return;
       }
 
@@ -263,10 +390,27 @@
       });
 
       qs('#cart-total').textContent = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+
+      const descontoPerc = calcularDesconto(total);
+      let desconto = 0;
+      if (descontoPerc > 0) {
+        desconto = total * descontoPerc;
+        discountRow.style.display = '';
+        discountSpan.textContent = desconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+      } else {
+        discountRow.style.display = 'none';
+        discountSpan.textContent = '0,00';
+      }
+
+      const finalTotal = total - desconto;
+      finalTotalSpan.textContent = finalTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+      renderParcelamento(finalTotal);
+
       saveCart();
     }
 
-   
     function removeItem(index) {
       cart.splice(index, 1);
       renderCart();
@@ -284,7 +428,6 @@
       renderCart();
     }
 
-
     qs('#checkout-btn').addEventListener('click', () => {
       if (!cart.length) return alert('Seu carrinho está vazio.');
       alert('Compra finalizada! Obrigado.');
@@ -293,45 +436,41 @@
       renderCart();
     });
 
-   
     window.removeItem = removeItem;
     window.alterarQtd = alterarQtd;
     window.alterarQtdDireta = alterarQtdDireta;
 
-
     loadCart();
-    addFromQuery();  
+    addFromQuery();
     renderCart();
   </script>
 </body>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      const darkModeIcon = document.getElementById('darkModeIcon');
-      const body = document.body;
+  document.addEventListener('DOMContentLoaded', function () {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const body = document.body;
 
-      
-      const savedMode = localStorage.getItem('darkMode');
-      if (savedMode === 'enabled') {
-        body.classList.add('dark-mode');
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'enabled') {
+      body.classList.add('dark-mode');
+      darkModeIcon.classList.remove('bi-moon-fill');
+      darkModeIcon.classList.add('bi-sun-fill');
+    }
+
+    darkModeToggle.addEventListener('click', function () {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
         darkModeIcon.classList.remove('bi-moon-fill');
-        darkModeIcon.classList.add('bi-sun-fill'); 
+        darkModeIcon.classList.add('bi-sun-fill');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        darkModeIcon.classList.remove('bi-sun-fill');
+        darkModeIcon.classList.add('bi-moon-fill');
+        localStorage.setItem('darkMode', 'disabled');
       }
-
-      darkModeToggle.addEventListener('click', function() {
-        body.classList.toggle('dark-mode');
-
-        
-        if (body.classList.contains('dark-mode')) {
-          darkModeIcon.classList.remove('bi-moon-fill');
-          darkModeIcon.classList.add('bi-sun-fill');
-          localStorage.setItem('darkMode', 'enabled'); 
-        } else {
-          darkModeIcon.classList.remove('bi-sun-fill');
-          darkModeIcon.classList.add('bi-moon-fill');
-          localStorage.setItem('darkMode', 'disabled'); 
-        }
-      });
     });
-    </script>
+  });
+</script>
+
 </html>

@@ -34,19 +34,19 @@
       box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
     }
 
-     body.dark-mode {
-      background-color: #1a1a1a; 
-      color: #f5f5f5; 
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #f5f5f5;
     }
 
     body.dark-mode .bg-body-tertiary {
-      background-color: #2c2c2c !important; 
+      background-color: #2c2c2c !important;
       border-bottom-color: #444;
       box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.1);
     }
 
     body.dark-mode form {
-      background-color: #333; 
+      background-color: #333;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
     }
 
@@ -56,11 +56,11 @@
     body.dark-mode .container.mt-4 h2,
     body.dark-mode .p-3.mb-4.rounded h2,
     body.dark-mode .p-3.mb-4.rounded p {
-      color: #f5f5f5; 
+      color: #f5f5f5;
     }
 
     body.dark-mode .container.mt-4 {
-      background: #2c2c2c; 
+      background: #2c2c2c;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.07);
     }
 
@@ -70,11 +70,11 @@
     }
 
     body.dark-mode footer {
-      background-color: #2c2c2c; 
+      background-color: #2c2c2c;
       color: #f5f5f5;
     }
 
-   
+
     .dark-mode-toggle {
       background: none;
       border: none;
@@ -128,6 +128,25 @@
           <li class="nav-item">
             <a class="nav-link" href="carrinho.html">Carrinho</a>
           </li>
+          <li class="nav-item position-relative">
+            <a class="nav-link" href="#" id="cartDropdownToggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
+            <i class="bi bi-cart-fill"></i>
+            <span id="cart-count"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              style="display: none;">
+              0
+            </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="cartDropdownToggle"
+              style="min-width: 300px;" id="cartDropdownMenu">
+              <li id="cart-items-list">Seu carrinho está vazio.</li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item text-center" href="carrinho.html">Ver Carrinho</a></li>
+            </ul>
+          </li>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         </ul>
         <button id="darkModeToggle" class="dark-mode-toggle">
           <i class="bi bi-moon-fill" id="darkModeIcon"></i> </button>
@@ -135,111 +154,160 @@
     </div>
   </nav>
 
-<div class="container">
+  <div class="container">
     <h2 class="text-center mb-4" style="text-decoration: underline; color:#436b52">CURIOSIDADES DO FUTEBOL</h2>
     <h4 style="text-align: center;"> Algumas curiosidades interessantes sobre o futebol:</h4>
     <br>
     <div class="row g-4">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Primeira Copa do Mundo</h5>
-                    <p class="card-text">A primeira Copa do Mundo de Futebol foi realizada no Uruguai, em 1930, e contou com apenas 13 seleções participantes.</p>
-                </div>
-            </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Primeira Copa do Mundo</h5>
+            <p class="card-text">A primeira Copa do Mundo de Futebol foi realizada no Uruguai, em 1930, e contou com
+              apenas 13 seleções participantes.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Maior Artilheiro</h5>
-                    <p class="card-text">Pelé é considerado um dos maiores artilheiros da história do futebol, com mais de 1.000 gols marcados em sua carreira.</p>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Maior Artilheiro</h5>
+            <p class="card-text">Pelé é considerado um dos maiores artilheiros da história do futebol, com mais de 1.000
+              gols marcados em sua carreira.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">O Jogo Mais Longo</h5>
-                    <p class="card-text">O jogo mais longo da história do futebol durou 3 dias, em 1946, entre Stockport County e Doncaster Rovers, na Inglaterra.</p>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">O Jogo Mais Longo</h5>
+            <p class="card-text">O jogo mais longo da história do futebol durou 3 dias, em 1946, entre Stockport County
+              e Doncaster Rovers, na Inglaterra.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Primeiro Gol de Copa</h5>
-                    <p class="card-text">O primeiro gol da história das Copas do Mundo foi marcado por Lucien Laurent, da França, em 1930.</p>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Primeiro Gol de Copa</h5>
+            <p class="card-text">O primeiro gol da história das Copas do Mundo foi marcado por Lucien Laurent, da
+              França, em 1930.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Maior Público em um Jogo</h5>
-                    <p class="card-text">O maior público registrado em uma partida de futebol foi de aproximadamente 199 mil pessoas no Maracanã, durante a final da Copa do Mundo de 1950.</p>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Maior Público em um Jogo</h5>
+            <p class="card-text">O maior público registrado em uma partida de futebol foi de aproximadamente 199 mil
+              pessoas no Maracanã, durante a final da Copa do Mundo de 1950.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Primeira Bola de Futebol</h5>
-                    <p class="card-text">As primeiras bolas de futebol eram feitas de bexiga de porco coberta por couro, antes da invenção das bolas modernas.</p>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Primeira Bola de Futebol</h5>
+            <p class="card-text">As primeiras bolas de futebol eram feitas de bexiga de porco coberta por couro, antes
+              da invenção das bolas modernas.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Recorde de Cartões Vermelhos</h5>
-                    <p class="card-text">A partida entre Sportivo Ameliano e General Caballero, no Paraguai, teve 20 cartões vermelhos distribuídos em 1993.</p>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Recorde de Cartões Vermelhos</h5>
+            <p class="card-text">A partida entre Sportivo Ameliano e General Caballero, no Paraguai, teve 20 cartões
+              vermelhos distribuídos em 1993.</p>
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">Primeira Transmissão de Futebol</h5>
-                    <p class="card-text">O primeiro jogo de futebol transmitido pela televisão foi em 1937, entre Arsenal e Arsenal Reserves, na Inglaterra.</p>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Primeira Transmissão de Futebol</h5>
+            <p class="card-text">O primeiro jogo de futebol transmitido pela televisão foi em 1937, entre Arsenal e
+              Arsenal Reserves, na Inglaterra.</p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
-  </body>
-  <footer class="text-center mt-5" style="background-color: #96c5a8; padding: 20px; color: white;">
-    <p>&copy; 2025 Estadiando. Todos os direitos reservados.</p>
-    </footer>
+</body>
+<footer class="text-center mt-5" style="background-color: #96c5a8; padding: 20px; color: white;">
+  <p>&copy; 2025 Estadiando. Todos os direitos reservados.</p>
+</footer>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      const darkModeIcon = document.getElementById('darkModeIcon');
-      const body = document.body;
+<script>
+  function renderCartDropdown() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartItemsList = document.getElementById('cart-items-list');
+    if (cart.length === 0) {
+      cartItemsList.innerHTML = 'Seu carrinho está vazio.';
+    } else {
+      cartItemsList.innerHTML = cart.map(item => `
+      <div class="mb-2">
+      <strong>${item.nome || item.name || 'Produto'}</strong><br>
+      <small>Qtd: ${item.quantidade || item.qtd || 1}</small>
+      </div>
+      `).join('');
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    renderCartDropdown();
+    document.getElementById('cartDropdownToggle').addEventListener('click', renderCartDropdown);
+  });
+  window.addEventListener('storage', renderCartDropdown);
+  setInterval(renderCartDropdown, 500);
 
-      
-      const savedMode = localStorage.getItem('darkMode');
-      if (savedMode === 'enabled') {
-        body.classList.add('dark-mode');
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let count = Array.isArray(cart) ? cart.length : 0;
+    const cartCount = document.getElementById('cart-count');
+    if (count > 0) {
+      cartCount.textContent = count;
+      cartCount.style.display = 'inline-block';
+    } else {
+      cartCount.style.display = 'none';
+    }
+  }
+  document.addEventListener('DOMContentLoaded', updateCartCount);
+
+
+  window.addEventListener('storage', updateCartCount);
+
+
+  setInterval(updateCartCount, 500);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const darkModeIcon = document.getElementById('darkModeIcon');
+    const body = document.body;
+
+
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'enabled') {
+      body.classList.add('dark-mode');
+      darkModeIcon.classList.remove('bi-moon-fill');
+      darkModeIcon.classList.add('bi-sun-fill');
+    }
+
+    darkModeToggle.addEventListener('click', function () {
+      body.classList.toggle('dark-mode');
+
+
+      if (body.classList.contains('dark-mode')) {
         darkModeIcon.classList.remove('bi-moon-fill');
-        darkModeIcon.classList.add('bi-sun-fill'); 
+        darkModeIcon.classList.add('bi-sun-fill');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        darkModeIcon.classList.remove('bi-sun-fill');
+        darkModeIcon.classList.add('bi-moon-fill');
+        localStorage.setItem('darkMode', 'disabled');
       }
-
-      darkModeToggle.addEventListener('click', function() {
-        body.classList.toggle('dark-mode');
-
-        
-        if (body.classList.contains('dark-mode')) {
-          darkModeIcon.classList.remove('bi-moon-fill');
-          darkModeIcon.classList.add('bi-sun-fill');
-          localStorage.setItem('darkMode', 'enabled'); 
-        } else {
-          darkModeIcon.classList.remove('bi-sun-fill');
-          darkModeIcon.classList.add('bi-moon-fill');
-          localStorage.setItem('darkMode', 'disabled'); 
-        }
-      });
     });
-    </script>
-  </html>
+  });
+</script>
+
+</html>
